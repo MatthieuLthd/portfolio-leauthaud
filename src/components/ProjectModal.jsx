@@ -9,7 +9,7 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
 
     // --- NOUVEAU : Fonction pour gérer proprement les chemins des assets ---
     const getAssetUrl = (path) => {
-        if (!path) return '';
+        if (!path || typeof path !== 'string') return '';
         if (path.startsWith('http')) return path; // Ignore si c'est un lien externe
 
         // Nettoie le chemin (enlève le slash du début s'il y en a un pour éviter //)

@@ -3,8 +3,10 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Environment, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
+const modelPath = `${import.meta.env.BASE_URL}models/abstract portfolio.glb`;
+
 const AbstractModel = () => {
-    const { scene } = useGLTF('/models/abstract portfolio.glb');
+    const { scene } = useGLTF(modelPath);
     const ref = useRef();
 
     // Modifiez les valeurs ici pour changer l'apparence du modèle
@@ -60,7 +62,7 @@ const AbstractModel = () => {
 };
 
 // Préchargement du modèle
-useGLTF.preload('/models/abstract portfolio.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}models/abstract portfolio.glb`);
 
 const Scene = () => {
     // --- Paramètres d'éclairage ---

@@ -55,7 +55,7 @@ const Home = () => {
             {/* --- Projects Section --- */}
             <section id="projets" className="relative py-20">
                 {/* Background: Custom Image/Video Placeholder */}
-                <SectionBackground src="/Images/home-bg.png" overlayOpacity={0.8} />
+                <SectionBackground src={`${import.meta.env.BASE_URL}Images/home-bg.png`} overlayOpacity={0.8} />
 
                 <div className="relative z-10">
                     <ProjectsSection />

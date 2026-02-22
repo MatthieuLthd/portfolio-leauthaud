@@ -128,6 +128,13 @@ const ProjectsSection = () => {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
+    const getAssetUrl = (path) => {
+        if (!path || typeof path !== 'string') return '';
+        if (path.startsWith('http')) return path; // Ignore si c'est un lien externe
+        const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+        return `${import.meta.env.BASE_URL}${cleanPath}`;
+    };
+
     const nextProject = (e) => {
         e?.stopPropagation();
         setActiveIndex((prev) => (prev + 1) % projects.length);
@@ -188,7 +195,7 @@ const ProjectsSection = () => {
                             >
                                 <div className="relative w-full h-full group">
                                     <img
-                                        src={project.image}
+                                        src={getAssetUrl(project.image)}
                                         alt={project.title}
                                         className="w-full h-full object-cover pointer-events-none" // Disable pointer on img to prevent drag conflicts
                                     />
