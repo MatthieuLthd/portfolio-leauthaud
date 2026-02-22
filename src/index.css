@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Chango&family=Rajdhani:wght@400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased;
+  }
+}
+
+/* Custom Scrollbar for Tech Theme */
+/* Custom Scrollbar for Tech Theme */
+/* Custom Scrollbar for Tech Theme - Aggressive Override */
+html.tech-scrollbar,
+body.tech-scrollbar,
+html.tech-scrollbar * {
+  scrollbar-width: thin;
+  scrollbar-color: #00f3ff #00091a;
+}
+
+html.tech-scrollbar::-webkit-scrollbar,
+body.tech-scrollbar::-webkit-scrollbar,
+html.tech-scrollbar *::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+html.tech-scrollbar::-webkit-scrollbar-track,
+body.tech-scrollbar::-webkit-scrollbar-track,
+html.tech-scrollbar *::-webkit-scrollbar-track {
+  background: #00091a;
+}
+
+html.tech-scrollbar::-webkit-scrollbar-thumb,
+body.tech-scrollbar::-webkit-scrollbar-thumb,
+html.tech-scrollbar *::-webkit-scrollbar-thumb {
+  background: #1a2c4e;
+  border: 1px solid #00f3ff;
+  border-radius: 6px;
+}
+
+html.tech-scrollbar::-webkit-scrollbar-thumb:hover,
+body.tech-scrollbar::-webkit-scrollbar-thumb:hover,
+html.tech-scrollbar *::-webkit-scrollbar-thumb:hover {
+  background: #00f3ff;
+  box-shadow: 0 0 15px #00f3ff;
+}
+
+/* Custom Scrollbar for Artisan Theme */
+.artisan-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.artisan-scrollbar::-webkit-scrollbar-track {
+  background: #585123;
+}
+
+.artisan-scrollbar::-webkit-scrollbar-thumb {
+  background: #eec170;
+  /* Honey Bronze */
+  border: 2px solid #585123;
+  /* Border to create padding effect */
+  border-radius: 5px;
+}
+
+.artisan-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #f2a65a;
+  /* Sandy Brown */
+}
+
+/* Noise Texture */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+}
