@@ -13,8 +13,8 @@ const projects = [
         gallery: [
             {
                 type: 'video',
-                src: '/Images/LDP/Demo1_SAE_LDP.mp4',
-                poster: '/Images/LDP/miniaDemo.png'
+                src: 'Images/LDP/Demo1_SAE_LDP.mp4',
+                poster: 'Images/LDP/miniaDemo.png'
             },
             'Images/LDP/SpoutSender.png',
             'Images/LDP/SpoutReciver.png',
@@ -22,7 +22,7 @@ const projects = [
             {
                 type: 'video',
                 src: 'Images/LDP/StreamDiff X Unity Fonctionnement.mp4',
-                poster: '/Images/LDP/miniaStreamDiff.png'
+                poster: 'Images/LDP/miniaStreamDiff.png'
             },
             'Images/LDP/Workflow_VoiceCloning.png',
         ],
@@ -37,16 +37,16 @@ const projects = [
         id: 2,
         title: 'Sound Design',
         category: 'Montage',
-        image: '/Images/TD_Son/PacificRim.jpeg',
+        image: 'Images/TD_Son/PacificRim.jpeg',
         description: "Lors de ce travail nous avons dû trouver une vidéo, supprimer totalement le son d'origine et recréer toute la bande sonore.",
         gallery: [
             {
                 type: 'video',
-                src: '/Images/TD_Son/TD Son - Final.mp4',
-                poster: '/Images/TD_Son/PacificRim.jpeg'
+                src: 'Images/TD_Son/TD Son - Final.mp4',
+                poster: 'Images/TD_Son/PacificRim.jpeg'
             },
-            '/Images/TD_Son/ImageMontage-partie1.png',
-            '/Images/TD_Son/ImageMontage-partie2.png'
+            'Images/TD_Son/ImageMontage-partie1.png',
+            'Images/TD_Son/ImageMontage-partie2.png'
         ],
         details: {
             "Technologie": "Adobe Audition, Audacity, Soundly",

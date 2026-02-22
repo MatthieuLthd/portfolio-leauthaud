@@ -10,12 +10,12 @@ const Navbar = ({ isAtelier }) => {
     const [lastScrollY, setLastScrollY] = useState(0);
 
     const navLinks = [
-        { name: 'Accueil', path: '/#accueil' },
-        { name: 'Projets', path: '/#projets' },
-        { name: 'Mon parcours', path: '/#parcours' },
-        { name: 'Expériences', path: '/#experiences' },
-        { name: 'Compétences', path: '/#competences' },
-        { name: 'Contact', path: '/#contact' },
+        { name: 'Accueil', path: '#accueil' },
+        { name: 'Projets', path: '#projets' },
+        { name: 'Mon parcours', path: '#parcours' },
+        { name: 'Expériences', path: '#experiences' },
+        { name: 'Compétences', path: '#competences' },
+        { name: 'Contact', path: '#contact' },
     ];
 
     const textColor = isAtelier ? 'text-artisan-secondary' : 'text-white';

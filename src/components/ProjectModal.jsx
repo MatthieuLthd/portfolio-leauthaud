@@ -7,6 +7,17 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
     const [lightboxIndex, setLightboxIndex] = useState(null);
     const isTech = theme === 'tech';
 
+    // --- NOUVEAU : Fonction pour gérer proprement les chemins des assets ---
+    const getAssetUrl = (path) => {
+        if (!path) return '';
+        if (path.startsWith('http')) return path; // Ignore si c'est un lien externe
+
+        // Nettoie le chemin (enlève le slash du début s'il y en a un pour éviter //)
+        const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+        return `${import.meta.env.BASE_URL}${cleanPath}`;
+    };
+    // ------------------------------------------------------------------------
+
     // Lock body scroll only when project is active
     useEffect(() => {
         if (project) {
@@ -16,7 +27,6 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
         }
         return () => {
             document.body.style.overflow = 'unset';
-            // Re-apply correct scrollbar if needed, but 'unset' usually reverts to stylesheet default
         };
     }, [project]);
 
@@ -115,7 +125,11 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
                                         className={`aspect-[4/5] rounded-lg overflow-hidden shadow-md cursor-zoom-in group ${isTech ? 'border border-white/10' : ''}`}
                                         onClick={() => openLightbox(0)}
                                     >
-                                        <img src={mainImage} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                        <img
+                                            src={getAssetUrl(mainImage)}
+                                            alt={project.title}
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        />
                                     </div>
 
                                     {/* Gallery Grid */}
@@ -130,7 +144,11 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
                                                     className={`relative aspect-square rounded-lg overflow-hidden shadow-sm cursor-zoom-in group ${isTech ? 'border border-white/10' : ''}`}
                                                     onClick={() => openLightbox(idx + 1)}
                                                 >
-                                                    <img src={src} alt={`Detail ${idx + 1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                                                    <img
+                                                        src={getAssetUrl(src)}
+                                                        alt={`Detail ${idx + 1}`}
+                                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                                    />
                                                     {isVideo && (
                                                         <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors">
                                                             <div className={`w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-sm border ${isTech ? 'bg-tech-primary/80 border-tech-primary text-black' : 'bg-white/80 border-white text-artisan-secondary'}`}>
@@ -146,7 +164,7 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
 
                                 {/* Content Column */}
                                 <div className={`p-8 md:p-12 flex flex-col ${contentColClasses} overflow-y-auto ${scrollbarClass} h-full`}>
-                                    <div className="mt-8 md:mt-0"> {/* Spacer for mobile or general padding */}
+                                    <div className="mt-8 md:mt-0">
                                         <span className={`${categoryClasses} mb-2 block`}>{project.category}</span>
                                         <h2 className={`text-5xl ${titleClasses} mb-8`}>{project.title}</h2>
 
@@ -202,17 +220,17 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
                                 if (isVideo) {
                                     return (
                                         <video
-                                            src={currentItem.src}
+                                            src={getAssetUrl(currentItem.src)}
                                             controls
                                             autoPlay
                                             className={`max-h-[80vh] max-w-[90vw] w-auto shadow-2xl rounded-2xl ${isTech ? 'ring-1 ring-tech-primary/50 box-shadow-[0_0_30px_rgba(0,243,255,0.2)]' : 'ring-1 ring-white/10'}`}
-                                            poster={currentItem.poster}
+                                            poster={getAssetUrl(currentItem.poster)}
                                         />
                                     );
                                 } else {
                                     return (
                                         <img
-                                            src={currentItem}
+                                            src={getAssetUrl(currentItem)}
                                             alt="Full screen view"
                                             className={`max-h-[80vh] max-w-[90vw] object-contain shadow-2xl rounded-2xl ${isTech ? 'ring-1 ring-tech-primary/50 box-shadow-[0_0_30px_rgba(0,243,255,0.2)]' : 'ring-1 ring-white/10'}`}
                                         />
