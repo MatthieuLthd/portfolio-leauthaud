@@ -25,7 +25,7 @@ const InternshipsSection = () => {
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
             >
-                <h2 className="text-4xl font-bold mb-12 text-center text-white">Expériences</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center text-white">Expériences</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {internships.map((item, index) => (
@@ -35,7 +35,7 @@ const InternshipsSection = () => {
                                     <h3 className="text-2xl font-bold text-white">{item.title}</h3>
                                     <p className="text-tech-primary font-mono">{item.company}</p>
                                 </div>
-                                <span className="px-3 py-1 text-xs font-bold rounded-full bg-tech-secondary/20 text-tech-secondary border border-tech-secondary/50">
+                                <span className="px-2 py-1 md:px-3 md:py-1 text-[10px] md:text-xs font-bold rounded-full bg-tech-secondary/20 text-tech-secondary border border-tech-secondary/50 mt-1 md:mt-0">
                                     {item.type}
                                 </span>
                             </div>

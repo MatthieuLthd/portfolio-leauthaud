@@ -24,7 +24,7 @@ const Atelier = () => {
                 >
                     <h1 className="font-chango text-6xl md:text-8xl mb-6 text-artisan-secondary">Projets manuels</h1>
                     <p className="font-serif text-xl md:text-2xl text-artisan-primary italic max-w-2xl mx-auto">
-                        "En plus du virtuel, j'aime créer des choses physiques"
+                        Quand l'écran s'éteint, mes mains prennent le relais pour façonner la matière.
                     </p>
                     <div className="w-24 h-1 bg-artisan-secondary mx-auto mt-8 rounded-full"></div>
                 </motion.div>

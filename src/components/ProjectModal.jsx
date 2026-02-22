@@ -105,7 +105,7 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
                             initial={{ scale: 0.9, y: 50 }}
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 50 }}
-                            className={`w-full max-w-6xl h-[85vh] rounded-xl overflow-hidden my-auto relative flex flex-col ${containerClasses}`}
+                            className={`w-full lg:max-w-[90vw] xl:max-w-[1400px] h-[85vh] rounded-xl overflow-hidden my-auto relative flex flex-col ${containerClasses}`}
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Close Modal Button */}
@@ -118,18 +118,18 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
                                 </svg>
                             </button>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 h-full">
+                            <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] h-full">
                                 {/* Visuals Column */}
                                 <div className={`${visualColClasses} p-6 md:p-8 space-y-6 overflow-y-auto ${scrollbarClass} h-full`}>
                                     {/* Main Image */}
                                     <div
-                                        className={`aspect-[4/5] rounded-lg overflow-hidden shadow-md cursor-zoom-in group ${isTech ? 'border border-white/10' : ''}`}
+                                        className={`w-full rounded-lg overflow-hidden shadow-md cursor-zoom-in group bg-black/50 flex items-center justify-center min-h-[300px] ${isTech ? 'border border-white/10' : ''}`}
                                         onClick={() => openLightbox(0)}
                                     >
                                         <img
-                                            src={getAssetUrl(mainImage)}
+                                            src={getAssetUrl(typeof mainImage === 'object' && mainImage !== null ? (mainImage.src || mainImage.image) : mainImage)}
                                             alt={project.title}
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                            className="w-full max-h-[60vh] object-contain group-hover:scale-105 transition-transform duration-500"
                                         />
                                     </div>
 
@@ -137,20 +137,26 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
                                     <div className="grid grid-cols-2 gap-4">
                                         {project.gallery && project.gallery.map((item, idx) => {
                                             const isVideo = typeof item === 'object' && item.type === 'video';
-                                            const src = isVideo ? item.poster : item;
+                                            const isYouTube = typeof item === 'object' && item.type === 'youtube';
+                                            const isObjectAndNotVideoOrYoutube = typeof item === 'object' && item !== null && !isVideo && !isYouTube;
+
+                                            let src;
+                                            if (isVideo) src = item.poster;
+                                            else if (isYouTube) src = `https://img.youtube.com/vi/${item.videoId}/hqdefault.jpg`;
+                                            else src = isObjectAndNotVideoOrYoutube ? (item.src || item.image) : item;
 
                                             return (
                                                 <div
                                                     key={idx}
-                                                    className={`relative aspect-square rounded-lg overflow-hidden shadow-sm cursor-zoom-in group ${isTech ? 'border border-white/10' : ''}`}
+                                                    className={`relative rounded-lg overflow-hidden shadow-sm cursor-zoom-in group bg-black/40 flex items-center justify-center min-h-[150px] ${isTech ? 'border border-white/10' : ''}`}
                                                     onClick={() => openLightbox(idx + 1)}
                                                 >
                                                     <img
                                                         src={getAssetUrl(src)}
                                                         alt={`Detail ${idx + 1}`}
-                                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                                        className="w-full h-48 object-contain group-hover:scale-110 transition-transform duration-300"
                                                     />
-                                                    {isVideo && (
+                                                    {(isVideo || isYouTube) && (
                                                         <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors">
                                                             <div className={`w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-sm border ${isTech ? 'bg-tech-primary/80 border-tech-primary text-black' : 'bg-white/80 border-white text-artisan-secondary'}`}>
                                                                 <svg className="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
@@ -169,9 +175,21 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
                                         <span className={`${categoryClasses} mb-2 block`}>{project.category}</span>
                                         <h2 className={`text-5xl ${titleClasses} mb-8`}>{project.title}</h2>
 
-                                        <div className={`prose prose-lg ${proseClasses} mb-12`}>
-                                            <p>{project.description}</p>
+                                        <div className={`prose prose-lg ${proseClasses} ${project.link ? 'mb-6' : 'mb-12'}`}>
+                                            <p className="whitespace-pre-line">{project.description}</p>
                                         </div>
+
+                                        {project.link && (
+                                            <a
+                                                href={project.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={`inline-flex items-center gap-2 mb-12 font-bold transition-all ${isTech ? 'text-tech-primary hover:text-white' : 'text-artisan-primary hover:text-artisan-secondary'}`}
+                                            >
+                                                Voir le site du Webdoc
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                                            </a>
+                                        )}
 
                                         {/* Details List */}
                                         <dl className={`grid grid-cols-2 gap-x-8 gap-y-6 border-t pt-8 ${isTech ? 'border-white/10' : 'border-artisan-secondary/20'}`}>
@@ -216,27 +234,45 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
                         >
                             {(() => {
                                 const currentItem = allImages[lightboxIndex];
-                                const isVideo = typeof currentItem === 'object' && currentItem.type === 'video';
+                                const isVideo = typeof currentItem === 'object' && currentItem !== null && currentItem.type === 'video';
+                                const isYouTube = typeof currentItem === 'object' && currentItem !== null && currentItem.type === 'youtube';
+                                const isObjectAndNotVideoOrYoutube = typeof currentItem === 'object' && currentItem !== null && !isVideo && !isYouTube;
+                                const src = isObjectAndNotVideoOrYoutube ? (currentItem.src || currentItem.image) : currentItem;
+                                const caption = (typeof currentItem === 'object' && currentItem !== null && currentItem.caption) ? currentItem.caption : null;
 
-                                if (isVideo) {
-                                    return (
-                                        <video
-                                            src={getAssetUrl(currentItem.src)}
-                                            controls
-                                            autoPlay
-                                            className={`max-h-[80vh] max-w-[90vw] w-auto shadow-2xl rounded-2xl ${isTech ? 'ring-1 ring-tech-primary/50 box-shadow-[0_0_30px_rgba(0,243,255,0.2)]' : 'ring-1 ring-white/10'}`}
-                                            poster={getAssetUrl(currentItem.poster)}
-                                        />
-                                    );
-                                } else {
-                                    return (
-                                        <img
-                                            src={getAssetUrl(currentItem)}
-                                            alt="Full screen view"
-                                            className={`max-h-[80vh] max-w-[90vw] object-contain shadow-2xl rounded-2xl ${isTech ? 'ring-1 ring-tech-primary/50 box-shadow-[0_0_30px_rgba(0,243,255,0.2)]' : 'ring-1 ring-white/10'}`}
-                                        />
-                                    );
-                                }
+                                return (
+                                    <div className="flex flex-col items-center">
+                                        {isVideo ? (
+                                            <video
+                                                src={getAssetUrl(currentItem.src)}
+                                                controls
+                                                autoPlay
+                                                className={`max-h-[75vh] max-w-[90vw] w-auto shadow-2xl rounded-2xl ${isTech ? 'ring-1 ring-tech-primary/50 box-shadow-[0_0_30px_rgba(0,243,255,0.2)]' : 'ring-1 ring-white/10'}`}
+                                                poster={getAssetUrl(currentItem.poster)}
+                                            />
+                                        ) : isYouTube ? (
+                                            <iframe
+                                                src={`https://www.youtube.com/embed/${currentItem.videoId}?autoplay=1`}
+                                                title="YouTube video player"
+                                                frameBorder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen
+                                                className={`w-[90vw] max-w-4xl aspect-video shadow-2xl rounded-2xl ${isTech ? 'ring-1 ring-tech-primary/50 box-shadow-[0_0_30px_rgba(0,243,255,0.2)]' : 'ring-1 ring-white/10'}`}
+                                            ></iframe>
+                                        ) : (
+                                            <img
+                                                src={getAssetUrl(src)}
+                                                alt={caption || "Full screen view"}
+                                                className={`max-h-[75vh] max-w-[90vw] object-contain shadow-2xl rounded-2xl ${isTech ? 'ring-1 ring-tech-primary/50 box-shadow-[0_0_30px_rgba(0,243,255,0.2)]' : 'ring-1 ring-white/10'}`}
+                                            />
+                                        )}
+                                        {caption && (
+                                            <p className={`text-center mt-6 px-6 py-3 rounded-xl text-base md:text-lg max-w-2xl font-rajdhani backdrop-blur-md ${isTech ? 'text-white bg-tech-primary/10 border border-tech-primary/20' : 'text-artisan-bg bg-artisan-secondary/90'}`}>
+                                                {caption}
+                                            </p>
+                                        )}
+                                    </div>
+                                );
                             })()}
 
                             <p className={`text-center mt-4 font-mono text-sm ${isTech ? 'text-tech-primary' : 'text-artisan-secondary'}`}>

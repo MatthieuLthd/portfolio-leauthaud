@@ -55,8 +55,8 @@ const Navbar = ({ isAtelier }) => {
                 </Link>
 
                 {/* Main Navigation (Desktop) */}
-                <div className="hidden md:flex items-center space-x-12">
-                    {navLinks.map((link) => (
+                <div className="hidden lg:flex items-center space-x-12">
+                    {!isAtelier && navLinks.map((link) => (
                         <NavLink
                             key={link.name}
                             to={link.path}
@@ -73,7 +73,7 @@ const Navbar = ({ isAtelier }) => {
                 </div>
 
                 {/* Tech/Atelier Switch (Desktop) */}
-                <div className="hidden md:flex items-center">
+                <div className="hidden lg:flex items-center">
                     <Link
                         to={isAtelier ? "/" : "/atelier"}
                         aria-label={isAtelier ? "Version Tech" : "Version Atelier"}
@@ -86,7 +86,7 @@ const Navbar = ({ isAtelier }) => {
                 {/* Mobile Menu Button - Kept generally same but aligned style */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`md:hidden z-50 w-10 h-10 flex items-center justify-center hover:bg-white/5 rounded-full transition-colors ${textColor}`}
+                    className={`lg:hidden z-50 w-10 h-10 flex items-center justify-center hover:bg-white/5 rounded-full transition-colors ${textColor}`}
                 >
                     {isOpen ? (
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -104,34 +104,53 @@ const Navbar = ({ isAtelier }) => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className={`fixed inset-0 z-40 md:hidden flex flex-col items-center justify-center ${isAtelier ? 'bg-artisan-bg' : 'bg-[#001233]'}`}
+                        initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                        animate={{ opacity: 1, backdropFilter: "blur(24px)" }}
+                        exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 h-[100dvh] min-h-screen z-40 lg:hidden flex flex-col items-center justify-center"
+                        style={{ backgroundColor: isAtelier ? 'rgba(23, 23, 23, 0.98)' : 'rgba(0, 18, 51, 0.98)' }}
                     >
-                        <ul className="flex flex-col space-y-8 text-center">
-                            {navLinks.map((link) => (
-                                <li key={link.name}>
+                        <ul className="flex flex-col space-y-8 text-center w-full px-6">
+                            {!isAtelier && navLinks.map((link, i) => (
+                                <motion.li
+                                    key={link.name}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.1 + i * 0.05 }}
+                                >
                                     <NavLink
                                         to={link.path}
                                         onClick={() => setIsOpen(false)}
                                         className={({ isActive }) =>
-                                            `block text-2xl font-rajdhani font-bold uppercase tracking-widest ${isActive ? activeColor : mobileLinkColor}`
+                                            `block text-xl md:text-3xl font-rajdhani font-bold uppercase tracking-widest transition-all duration-300 ${isActive ? `${activeColor} scale-110` : `${mobileLinkColor} opacity-70 hover:opacity-100 hover:scale-105`}`
                                         }
                                     >
                                         {link.name}
                                     </NavLink>
-                                </li>
+                                </motion.li>
                             ))}
-                            <li className="pt-8">
+                            <motion.li
+                                className="pt-8 flex justify-center"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.1 + navLinks.length * 0.05 }}
+                            >
                                 <Link
                                     to={isAtelier ? "/" : "/atelier"}
                                     onClick={() => setIsOpen(false)}
+                                    className="transform scale-100 md:scale-110 transition-transform hover:scale-110 md:hover:scale-[1.25]"
                                 >
                                     <TechAtelierSwitch isAtelier={isAtelier} />
                                 </Link>
-                            </li>
+                            </motion.li>
                         </ul>
+
+                        {/* Decorative background elements for mobile menu */}
+                        <div className="absolute inset-0 z-[-1] overflow-hidden pointer-events-none">
+                            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-tech-primary/10 rounded-full blur-[100px]"></div>
+                            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-tech-secondary/10 rounded-full blur-[120px]"></div>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>

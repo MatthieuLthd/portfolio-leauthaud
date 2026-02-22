@@ -11,7 +11,7 @@ const ContactSection = () => {
                 viewport={{ once: true }}
                 className="p-10"
             >
-                <h2 className="text-4xl font-rajdhani font-bold mb-6 text-white">Contact</h2>
+                <h2 className="text-3xl md:text-4xl font-rajdhani font-bold mb-4 md:mb-6 text-white">Contact</h2>
                 <p className="text-gray-400 font-space-mono text-lg mb-8 max-w-2xl mx-auto">
                     N'hésitez pas à me contacter pour discuter.
                 </p>

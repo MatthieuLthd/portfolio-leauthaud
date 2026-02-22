@@ -24,7 +24,7 @@ export const atelierProjects = [
         }
     },
     {
-        id: 2,
+        id: 5,
         title: 'Cadre Lune',
         category: 'Divers',
         mainImage: 'Images/Lune/20240912_092521.jpg',
@@ -92,7 +92,7 @@ export const atelierProjects = [
         }
     },
     {
-        id: 5,
+        id: 2,
         title: 'Cadre sculpté effet forêt',
         category: 'Menuiserie / Sculpture',
         mainImage: 'Images/Cadre/Main Cadre.jpg',

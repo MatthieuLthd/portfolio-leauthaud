@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ProjectModal from './ProjectModal';
 
 const projects = [
+    // LDP
     {
         id: 1,
         title: 'Le Livre des Pionnières',
@@ -14,17 +15,31 @@ const projects = [
             {
                 type: 'video',
                 src: 'Images/LDP/Demo1_SAE_LDP.mp4',
+                caption: "Première vidéo de démo",
                 poster: 'Images/LDP/miniaDemo.png'
             },
-            'Images/LDP/SpoutSender.png',
-            'Images/LDP/SpoutReciver.png',
-            'Images/LDP/Workflow_StreamDiff.png',
+            {
+                src: 'Images/LDP/SpoutSender.png',
+                caption: "Envoi des données via Spout depuis TouchDesigner",
+            },
+            {
+                src: 'Images/LDP/SpoutReciver.png',
+                caption: "Reception des données via Spout dans Unity",
+            },
+            {
+                src: 'Images/LDP/Workflow_StreamDiff.png',
+                caption: "Workflow de StreamDiff dans TouchDesigner",
+            },
             {
                 type: 'video',
                 src: 'Images/LDP/StreamDiff X Unity Fonctionnement.mp4',
+                caption: "Fonctionnement de StreamDiff envoyé dans Unity",
                 poster: 'Images/LDP/miniaStreamDiff.png'
             },
-            'Images/LDP/Workflow_VoiceCloning.png',
+            {
+                src: 'Images/LDP/Workflow_VoiceCloning.png',
+                caption: "Workflow de VoiceCloning dans ComfyUI avec Chatterbox",
+            },
         ],
         details: {
             "Technologie": "Unity, C#, Meta SDK, Meta Quest 3, ComfyUI, Blender",
@@ -33,6 +48,7 @@ const projects = [
             "Durée": "6 mois"
         }
     },
+    // TD Son
     {
         id: 2,
         title: 'Sound Design',
@@ -43,10 +59,17 @@ const projects = [
             {
                 type: 'video',
                 src: 'Images/TD_Son/TD Son - Final.mp4',
+                caption: "Vidéo du résultat final",
                 poster: 'Images/TD_Son/PacificRim.jpeg'
             },
-            'Images/TD_Son/ImageMontage-partie1.png',
-            'Images/TD_Son/ImageMontage-partie2.png'
+            {
+                src: 'Images/TD_Son/ImageMontage-partie1.png',
+                caption: "Montage de la première partie",
+            },
+            {
+                src: 'Images/TD_Son/ImageMontage-partie2.png',
+                caption: "Montage de la deuxième partie",
+            }
         ],
         details: {
             "Technologie": "Adobe Audition, Audacity, Soundly",
@@ -54,42 +77,72 @@ const projects = [
             "Durée": "3 jours"
         }
     },
+    // LG
     {
         id: 3,
         title: 'Light Guardian',
-        category: 'Machine Learning',
-        image: 'https://placehold.co/600x400/1a1a1a/00ff00',
-        description: "Next-generation AI interface focusing on natural language processing and adaptive UI. The system learns from user patterns to provide a personalized workflow assistant.",
+        category: 'VR',
+        image: 'Images/LG/LGMinia.png',
+        description: "Ce projet est le premier projet VR que nous avons créé en classe en duo en utilisant Unity et le Meta SDK.",
         gallery: [
-            'https://placehold.co/600x600/1a1a1a/00ff00/1',
+            {
+                type: 'video',
+                src: 'Images/LG/LightGuardianDemo.mp4',
+                caption: "Vidéo du résultat final",
+                poster: 'Images/LG/LGMinia.png'
+            },
             'https://placehold.co/600x600/1a1a1a/00ff00/2',
             'https://placehold.co/600x600/1a1a1a/00ff00/3',
             'https://placehold.co/600x600/1a1a1a/00ff00/4'
         ],
         details: {
-            "Technologie": "Python, TensorFlow, React",
-            "Année": "2023",
-            "Rôle": "Full Stack Dev",
-            "Durée": "5 mois"
+            "Technologie": "Unity, C#, Meta SDK, Meta Quest 3",
+            "Année": "Janvier 2025",
+            "Rôle": "Développeur VR et création des assets",
+            "Durée": "5 jours"
         }
     },
+    // Webdoc
     {
         id: 4,
-        title: 'Cyber Deck',
-        category: 'Hardware Interface',
-        image: 'https://placehold.co/600x400/1a1a1a/ff0055',
-        description: "Physical computing project integrating custom hardware controls with a digital dashboard. A tribute to retro-futuristic terminals and cyberdecks.",
+        title: 'Web Documentaire sur l\'ultra réalisme dans les jeux vidéos',
+        category: 'Rédaction / Montage',
+        image: 'Images/Webdoc/Miniature_BeamNG.jpg',
+        description: "Dans ce projet nous avons eu l'occasion de créer un webdocumentaire créé de toute pièce par nous-même. Nous étions 4 chacun a couvert un asect différent du documentaire. Pour ma part j'ai couvert la partie sur le jeu BeamNG.Drive et donc plus précisément la physique softbody du jeu rendant l'expérience ultra réaliste. \n Pour découvrir le documentaire cliquez sur le lien ci-dessous.\n",
+        link: 'http://polygone.raphael.kondratiuk.mmi-velizy.fr/',
         gallery: [
-            'https://placehold.co/600x600/1a1a1a/ff0055/1',
-            'https://placehold.co/600x600/1a1a1a/ff0055/2',
-            'https://placehold.co/600x600/1a1a1a/ff0055/3',
-            'https://placehold.co/600x600/1a1a1a/ff0055/4'
+            {
+                type: 'youtube',
+                videoId: '28TxkF7mauI',
+                caption: 'Vidéo sur l\'ultra réalisme dans les jeux vidéos. Le cas BeamNG.Drive'
+            }
         ],
         details: {
-            "Technologie": "Arduino, Node.js, Electron",
-            "Année": "2022",
-            "Rôle": "Maker",
-            "Durée": "2 mois"
+            "Logiciel de montage": "DaVinci Resolve",
+            "Année": "2025",
+            "Rôle": "Rédaction, préparation et montage de l'interview",
+            "Durée": "4 mois"
+        }
+    },
+    // UI unity
+    {
+        id: 5,
+        title: 'UI Unity',
+        category: 'UI',
+        image: 'Images/UI/UIUnity.png',
+        description: "Decentralized storage solution with a sleek, futuristic interface. Prioritizing user privacy and data security through distributed network architecture.",
+        gallery: [
+            {
+                type: 'video',
+                src: 'Images/UI/Demo UI.mp4',
+                caption: "Vidéo du résultat final",
+                poster: 'Images/UI/UIUnity.png'
+            },
+        ],
+        details: {
+            "Technologie": "Unity, C#",
+            "Année": "2025",
+            "Durée": "1 semaine"
         }
     },
     {
