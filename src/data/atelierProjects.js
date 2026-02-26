@@ -1,4 +1,5 @@
 export const atelierProjects = [
+    //Baguettes Magiques
     {
         id: 1,
         title: 'Baguettes Magiques',
@@ -23,6 +24,7 @@ export const atelierProjects = [
             "Temps de travail": "15h"
         }
     },
+    //Cadre Lune
     {
         id: 5,
         title: 'Cadre Lune',
@@ -41,6 +43,7 @@ export const atelierProjects = [
             "Temps de travail": "8h"
         }
     },
+    //Bague
     {
         id: 3,
         title: 'Bague',
@@ -65,6 +68,7 @@ export const atelierProjects = [
             "Année": "2025"
         }
     },
+    //Boite Cadeaux
     {
         id: 4,
         title: 'Boite Cadeaux',
@@ -91,6 +95,7 @@ export const atelierProjects = [
             "Année": "2024",
         }
     },
+    //Cadre sculpté effet forêt
     {
         id: 2,
         title: 'Cadre sculpté effet forêt',
@@ -121,9 +126,29 @@ export const atelierProjects = [
             'Images/Cadre/21.jpg',
         ],
         details: {
-            "Matériaux": "Ilford HP5, Papier Baryté",
-            "Année": "2023",
-            "Format": "35mm"
+            "Bois": "Epicea, Ruban COB LED, Guirlande LED effet Lierre, végétation artificielle",
+            "Outils": "Tronconneuse, Rabot électrique, Dégauchisseuse, Scie à onglet, Défonceuse, Disque de sculpture Kutzall, Dremelle, Pistolet à colle chaude",
+            "Année": "2025",
+            "Temps de travail": "Environ 50h"
+        }
+    },
+    {
+        id: 6,
+        title: 'Pupitre en bois de récupération',
+        category: 'Menuiserie / Sculpture',
+        mainImage: 'Images/Pupitre/3D.png',
+        description: "Pupitre en bois de récupération pour l\'exposition de fin d\'année de MMI3",
+        gallery: [
+            'Images/Pupitre/1.jpg',
+            'Images/Pupitre/2.jpg',
+            'Images/Pupitre/3.jpg',
+            'Images/Pupitre/4.jpg',
+            'Images/Pupitre/5.jpg',
+            'Images/Pupitre/6.jpg',
+        ],
+        details: {
+            "Matériaux": "Bois de récupération",
+            "Année": "2026",
         }
     },
 ];

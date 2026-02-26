@@ -15,11 +15,12 @@ export default {
                     accent: '#D3C9C1',
                 },
                 artisan: {
-                    bg: '#284139',
-                    primary: '#809076',
-                    secondary: '#F8D794',
-                    surface: '#ad6c3c',
-                    accent: '#111A19',
+                    bg: '#33352C', // Deepwood Shade
+                    primary: '#F5F5D3', // Fern Whisper
+                    secondary: '#BB8954', // Earthy Drift
+                    surface: '#4C2B12', // Timber Breeze
+                    accent: '#798262', // Canopy Green
+                    forest: '#7F5235', // Forest Floor (extra color from palette)
                 },
             },
             fontFamily: {

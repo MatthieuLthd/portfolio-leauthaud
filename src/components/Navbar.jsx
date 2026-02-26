@@ -46,12 +46,12 @@ const Navbar = ({ isAtelier }) => {
 
     return (
         <nav
-            className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'} ${lastScrollY > 50 ? (isAtelier ? 'bg-artisan-bg/90 backdrop-blur-md py-4' : 'bg-[#001233]/80 backdrop-blur-md py-4') : 'bg-transparent py-8'}`}
+            className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'} ${lastScrollY > 50 ? (isAtelier ? 'bg-artisan-bg/90 backdrop-blur-md py-4' : 'bg-[#001233]/80 backdrop-blur-md py-4') : 'bg-transparent py-4'}`}
         >
             <div className={`max-w-7xl mx-auto flex items-center justify-between px-6 transition-colors duration-500`}>
                 {/* Logo / Brand */}
-                <Link to="/" className={`text-xl md:text-2xl font-rajdhani font-bold tracking-widest uppercase transition-colors duration-500 ${logoColor} z-50`}>
-                    PORTFOLIO<span className={isAtelier ? 'text-artisan-primary' : 'text-tech-primary'}>.</span>
+                <Link to="/" className="z-50 flex items-center transition-transform hover:scale-105">
+                    <img src="logo.png" alt="Logo Matthieu Leauthaud" className="h-16 w-auto md:h-20 object-contain" />
                 </Link>
 
                 {/* Main Navigation (Desktop) */}

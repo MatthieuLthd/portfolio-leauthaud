@@ -6,6 +6,20 @@ import ProjectModal from './ProjectModal';
 const MasonryGallery = () => {
     const [selectedProject, setSelectedProject] = useState(null);
 
+    const handleNextProject = () => {
+        if (!selectedProject) return;
+        const currentIndex = atelierProjects.findIndex(p => p.id === selectedProject.id);
+        const nextIndex = (currentIndex + 1) % atelierProjects.length;
+        setSelectedProject(atelierProjects[nextIndex]);
+    };
+
+    const handlePrevProject = () => {
+        if (!selectedProject) return;
+        const currentIndex = atelierProjects.findIndex(p => p.id === selectedProject.id);
+        const prevIndex = (currentIndex - 1 + atelierProjects.length) % atelierProjects.length;
+        setSelectedProject(atelierProjects[prevIndex]);
+    };
+
     return (
         <>
             <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 p-8">
@@ -34,6 +48,8 @@ const MasonryGallery = () => {
                 <ProjectModal
                     project={selectedProject}
                     onClose={() => setSelectedProject(null)}
+                    onNextProject={handleNextProject}
+                    onPrevProject={handlePrevProject}
                 />
             )}
         </>

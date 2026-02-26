@@ -53,7 +53,7 @@ const projects = [
         id: 2,
         title: 'Sound Design',
         category: 'Montage',
-        image: 'Images/TD_Son/PacificRim.jpeg',
+        image: 'Images/TD_Son/PacificRim.png',
         description: "Lors de ce travail nous avons dû trouver une vidéo, supprimer totalement le son d'origine et recréer toute la bande sonore.",
         gallery: [
             {
@@ -90,10 +90,7 @@ const projects = [
                 src: 'Images/LG/LightGuardianDemo.mp4',
                 caption: "Vidéo du résultat final",
                 poster: 'Images/LG/LGMinia.png'
-            },
-            'https://placehold.co/600x600/1a1a1a/00ff00/2',
-            'https://placehold.co/600x600/1a1a1a/00ff00/3',
-            'https://placehold.co/600x600/1a1a1a/00ff00/4'
+            }
         ],
         details: {
             "Technologie": "Unity, C#, Meta SDK, Meta Quest 3",
@@ -147,21 +144,18 @@ const projects = [
     },
     {
         id: 5,
-        title: 'Ether Drive',
-        category: 'Blockchain',
-        image: 'https://placehold.co/600x400/1a1a1a/00ffff',
-        description: "Decentralized storage solution with a sleek, futuristic interface. Prioritizing user privacy and data security through distributed network architecture.",
+        title: 'Rendus 3D',
+        category: '3D',
+        image: 'Images/Rendus3D/5.png',
+        description: "Voici une série de rendus 3D que j'ai réalisé sur le logiciel Blender.",
         gallery: [
-            'https://placehold.co/600x600/1a1a1a/00ffff/1',
-            'https://placehold.co/600x600/1a1a1a/00ffff/2',
-            'https://placehold.co/600x600/1a1a1a/00ffff/3',
-            'https://placehold.co/600x600/1a1a1a/00ffff/4'
+            'Images/Rendus3D/2.png',
+            'Images/Rendus3D/3.png',
+            'Images/Rendus3D/4.png',
+            'Images/Rendus3D/5.png'
         ],
         details: {
-            "Technologie": "Solidity, Web3.js, IPFS",
-            "Année": "2024",
-            "Rôle": "Blockchain Dev",
-            "Durée": "4 mois"
+            "Logiciel": "Blender"
         }
     },
 ];
@@ -193,12 +187,20 @@ const ProjectsSection = () => {
 
     const nextProject = (e) => {
         e?.stopPropagation();
-        setActiveIndex((prev) => (prev + 1) % projects.length);
+        setActiveIndex((prev) => {
+            const nextIdx = (prev + 1) % projects.length;
+            if (selectedProject) setSelectedProject(projects[nextIdx]);
+            return nextIdx;
+        });
     };
 
     const prevProject = (e) => {
         e?.stopPropagation();
-        setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length);
+        setActiveIndex((prev) => {
+            const prevIdx = (prev - 1 + projects.length) % projects.length;
+            if (selectedProject) setSelectedProject(projects[prevIdx]);
+            return prevIdx;
+        });
     };
 
     const handleCardClick = (index, project) => {
@@ -301,6 +303,8 @@ const ProjectsSection = () => {
             <ProjectModal
                 project={selectedProject}
                 onClose={() => setSelectedProject(null)}
+                onNextProject={nextProject}
+                onPrevProject={prevProject}
                 theme="tech"
             />
         </section>

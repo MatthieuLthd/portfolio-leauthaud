@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import ParallaxBackground from './ParallaxBackground';
 
-const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
+const ProjectModal = ({ project, onClose, onNextProject, onPrevProject, theme = 'artisan' }) => {
     const [lightboxIndex, setLightboxIndex] = useState(null);
     const isTech = theme === 'tech';
 
@@ -42,11 +42,13 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
                 if (e.key === 'ArrowLeft') prevImage();
             } else {
                 if (e.key === 'Escape') onClose();
+                if (e.key === 'ArrowRight' && onNextProject) onNextProject();
+                if (e.key === 'ArrowLeft' && onPrevProject) onPrevProject();
             }
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [lightboxIndex, onClose, project]);
+    }, [lightboxIndex, onClose, project, onNextProject, onPrevProject]);
 
     const mainImage = project ? (project.mainImage || project.image) : null;
     const allImages = project ? [mainImage, ...(project.gallery || [])] : [];
@@ -101,11 +103,23 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
                         className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-hidden"
                         onClick={onClose}
                     >
+                        {/* Prev Project Button */}
+                        {onPrevProject && (
+                            <button
+                                onClick={(e) => { e.stopPropagation(); onPrevProject(); }}
+                                className={`hidden md:flex absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-[60] p-2 rounded-full transition-colors ${isTech ? 'text-tech-primary hover:bg-white/10' : 'text-artisan-secondary hover:bg-artisan-surface/20'}`}
+                            >
+                                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                        )}
+
                         <motion.div
                             initial={{ scale: 0.9, y: 50 }}
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 50 }}
-                            className={`w-full lg:max-w-[90vw] xl:max-w-[1400px] h-[85vh] rounded-xl overflow-hidden my-auto relative flex flex-col ${containerClasses}`}
+                            className={`w-full lg:max-w-[85vw] xl:max-w-[1400px] h-[85vh] rounded-xl overflow-hidden my-auto relative flex flex-col ${containerClasses}`}
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Close Modal Button */}
@@ -134,7 +148,7 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
                                     </div>
 
                                     {/* Gallery Grid */}
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="columns-2 gap-4 space-y-4">
                                         {project.gallery && project.gallery.map((item, idx) => {
                                             const isVideo = typeof item === 'object' && item.type === 'video';
                                             const isYouTube = typeof item === 'object' && item.type === 'youtube';
@@ -148,13 +162,13 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
                                             return (
                                                 <div
                                                     key={idx}
-                                                    className={`relative rounded-lg overflow-hidden shadow-sm cursor-zoom-in group bg-black/40 flex items-center justify-center min-h-[150px] ${isTech ? 'border border-white/10' : ''}`}
+                                                    className={`relative rounded-lg overflow-hidden shadow-sm cursor-zoom-in group bg-black/40 flex items-center justify-center break-inside-avoid ${isTech ? 'border border-white/10' : ''}`}
                                                     onClick={() => openLightbox(idx + 1)}
                                                 >
                                                     <img
                                                         src={getAssetUrl(src)}
                                                         alt={`Detail ${idx + 1}`}
-                                                        className="w-full h-48 object-contain group-hover:scale-110 transition-transform duration-300"
+                                                        className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-300"
                                                     />
                                                     {(isVideo || isYouTube) && (
                                                         <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors">
@@ -204,6 +218,18 @@ const ProjectModal = ({ project, onClose, theme = 'artisan' }) => {
                                 </div>
                             </div>
                         </motion.div>
+
+                        {/* Next Project Button */}
+                        {onNextProject && (
+                            <button
+                                onClick={(e) => { e.stopPropagation(); onNextProject(); }}
+                                className={`hidden md:flex absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-[60] p-2 rounded-full transition-colors ${isTech ? 'text-tech-primary hover:bg-white/10' : 'text-artisan-secondary hover:bg-artisan-surface/20'}`}
+                            >
+                                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        )}
                     </motion.div>
                 )}
             </AnimatePresence>
