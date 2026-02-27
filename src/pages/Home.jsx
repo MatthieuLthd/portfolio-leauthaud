@@ -37,57 +37,76 @@ const Home = () => {
     }, []);
 
     return (
-        <div className="relative min-h-screen overflow-x-hidden bg-[#001233]">
+        <div className="relative min-h-screen overflow-x-hidden bg-black">
             {/* Navigation */}
             {/* Note: Navbar is usually in Layout, but if it's here ensure z-index is high */}
 
             {/* --- Hero Section --- */}
-            <section id="accueil" className="relative min-h-screen">
+            <section id="accueil" className="relative min-h-screen bg-[#001233]">
                 {/* Background: Mesh Gradient (Tech) or Image */}
                 <div className="absolute inset-0 z-0">
                     <ParallaxBackground theme="tech" />
                 </div>
+
+                {/* Fade Mask at the bottom of Hero to blend into Unified Wrapper */}
+                <div className="absolute bottom-0 left-0 w-full h-48 md:h-64 bg-gradient-to-t from-[#001233] to-transparent z-10 pointer-events-none" />
+
                 <div className="relative z-10">
                     <HeroSection />
                 </div>
             </section>
 
-            {/* --- Projects Section --- */}
-            <section id="projets" className="relative py-20">
-                {/* Background: Custom Image/Video Placeholder */}
-                <SectionBackground src={`${import.meta.env.BASE_URL}${import.meta.env.BASE_URL.endsWith('/') ? '' : '/'}Images/home-bg.png`} overlayOpacity={0.8} />
+            {/* --- Unified Section for Projects & Experience --- */}
+            <div className="relative w-full overflow-hidden">
+                {/* Unified Background: Seamless gradient matching Hero (top #001233) and Internships (bottom #001233) */}
+                <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#001233] via-[#00091a] to-[#001233] pointer-events-none" />
+                <div className="absolute inset-0 z-0 bg-noise mix-blend-overlay opacity-30 pointer-events-none" />
 
-                <div className="relative z-10">
-                    <ProjectsSection />
-                </div>
-            </section>
+                {/* Embedded Parallax Elements for Tech Theme */}
+                <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                    <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-tech-primary/5 rounded-full blur-3xl mix-blend-screen" />
+                    <div className="absolute top-[40%] right-[10%] w-96 h-96 bg-tech-secondary/10 rounded-full blur-3xl mix-blend-screen" />
+                    <div className="absolute bottom-[20%] left-[15%] w-72 h-72 bg-tech-primary/5 rounded-full blur-3xl mix-blend-screen" />
 
-            {/* --- Experience Section --- */}
-            <section id="parcours" className="relative py-20">
-                <div className="absolute inset-0 z-0 bg-[#001233]" />
-                <div className="relative z-10">
-                    <ExperienceSection />
+                    {/* Grid Lines Overlay */}
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black_40%,transparent_100%)] pointer-events-none" />
                 </div>
-            </section>
+
+                {/* --- Projects Section --- */}
+                <section id="projets" className="relative py-20">
+                    <div className="relative z-10">
+                        <ProjectsSection />
+                    </div>
+                </section>
+
+                {/* --- Experience Section --- */}
+                <section id="parcours" className="relative py-20">
+                    <div className="relative z-10">
+                        <ExperienceSection />
+                    </div>
+                </section>
+            </div>
 
             {/* --- Internships Section --- */}
-            <section id="experiences" className="relative py-20">
-                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#001233] to-[#011a4a]" />
+            <section id="experiences" className="relative py-20 bg-[#001233]">
+                {/* Fade from Hero/Projects #001233 down to #011a4a */}
+                <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#001233] to-[#011a4a] pointer-events-none" />
                 <div className="relative z-10">
                     <InternshipsSection />
                 </div>
             </section>
 
             {/* --- Skills & Contact Section --- */}
-            <section id="competences" className="relative py-20">
-                <div className="absolute inset-0 z-0 bg-[#001233]" />
+            <section id="competences" className="relative py-20 bg-[#011a4a]">
+                {/* Fade from Internships #011a4a back down to #001233 */}
+                <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#011a4a] to-[#001233] pointer-events-none" />
                 <div className="relative z-10">
                     <SkillsSection />
                 </div>
             </section>
 
-            <section id="contact" className="relative py-20">
-                <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#001233] to-black" />
+            <section id="contact" className="relative py-20 bg-[#001233]">
+                <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#001233] to-black pointer-events-none" />
                 <div className="relative z-10">
                     <ContactSection />
                 </div>

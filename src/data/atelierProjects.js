@@ -144,11 +144,18 @@ export const atelierProjects = [
             'Images/Pupitre/3.jpg',
             'Images/Pupitre/4.jpg',
             'Images/Pupitre/5.jpg',
-            'Images/Pupitre/6.jpg',
+            {
+                type: 'video',
+                src: 'Images/Pupitre/6.mp4',
+                caption: "Découpe de planches",
+                poster: 'Images/Pupitre/7.png'
+            },
         ],
         details: {
             "Matériaux": "Bois de récupération",
             "Année": "2026",
+            "Temps de travail": "Environ 20h",
+            "Outils": "Scie sous table, Scie à onglet, Pistolet à clous pneumatique, Disque de sculpture Kutzall"
         }
     },
 ];

@@ -6,6 +6,16 @@ import ProjectModal from './ProjectModal';
 const MasonryGallery = () => {
     const [selectedProject, setSelectedProject] = useState(null);
 
+    const getAssetUrl = (path) => {
+        if (!path || typeof path !== 'string') return '';
+        if (path.startsWith('http')) return path;
+
+        const base = import.meta.env.BASE_URL;
+        const cleanBase = base.endsWith('/') ? base : `${base}/`;
+        const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+        return `${cleanBase}${cleanPath}`;
+    };
+
     const handleNextProject = () => {
         if (!selectedProject) return;
         const currentIndex = atelierProjects.findIndex(p => p.id === selectedProject.id);
@@ -35,8 +45,29 @@ const MasonryGallery = () => {
                         onClick={() => setSelectedProject(project)}
                         layoutId={`project-${project.id}`}
                     >
-                        <div className="aspect-w-1 aspect-h-1 mb-4 overflow-hidden bg-gray-100">
-                            <img src={project.mainImage} alt={project.title} className="object-cover w-full h-full" />
+                        <div className="aspect-w-1 aspect-h-1 mb-4 overflow-hidden bg-gray-100 relative group">
+                            {(() => {
+                                const isVideo = typeof project.mainImage === 'object' && project.mainImage !== null && project.mainImage.type === 'video';
+                                const isYouTube = typeof project.mainImage === 'object' && project.mainImage !== null && project.mainImage.type === 'youtube';
+
+                                let imgSrc;
+                                if (isVideo) imgSrc = project.mainImage.poster;
+                                else if (isYouTube) imgSrc = `https://img.youtube.com/vi/${project.mainImage.videoId}/hqdefault.jpg`;
+                                else imgSrc = typeof project.mainImage === 'object' && project.mainImage !== null ? (project.mainImage.src || project.mainImage.image) : project.mainImage;
+
+                                return (
+                                    <>
+                                        <img src={getAssetUrl(imgSrc)} alt={project.title} className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105" />
+                                        {(isVideo || isYouTube) && (
+                                            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                                                <div className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-sm border bg-white/80 border-white text-artisan-secondary shadow-lg">
+                                                    <svg className="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </>
+                                );
+                            })()}
                         </div>
                         <h3 className="font-chango text-2xl text-artisan-surface mb-2">{project.title}</h3>
                         <p className="font-serif text-gray-600 italic line-clamp-2">{project.description}</p>

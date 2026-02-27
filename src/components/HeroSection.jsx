@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Scene from './Scene';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 const HeroSection = () => {
+    const sectionRef = useRef(null);
+    // Render the scene only if the section is in view (with a small margin so it loads just before scrolling in)
+    const isInView = useInView(sectionRef, { margin: "200px 0px" });
+
     return (
-        <section className="relative min-h-screen pt-24 lg:pt-0 flex flex-col lg:grid lg:grid-cols-2 items-center justify-items-center overflow-hidden max-w-screen-2xl mx-auto px-6 gap-8 pb-12 lg:pb-0">
+        <section ref={sectionRef} className="relative min-h-screen pt-24 lg:pt-0 flex flex-col lg:grid lg:grid-cols-2 items-center justify-items-center overflow-hidden max-w-screen-2xl mx-auto px-6 gap-8 pb-12 lg:pb-0">
 
             {/* Left Column: Text Content */}
             <div className="relative z-10 w-full flex justify-center lg:justify-start lg:pl-20 mt-12 lg:mt-0 pointer-events-none">
@@ -28,7 +32,7 @@ const HeroSection = () => {
 
             {/* Right Column: 3D Scene */}
             <div className="relative w-full h-[45vh] md:h-[55vh] lg:h-full z-0 opacity-100 flex items-center justify-center -mt-8 lg:mt-0">
-                <Scene />
+                {isInView && <Scene />}
             </div>
         </section>
     );

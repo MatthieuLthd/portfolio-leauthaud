@@ -9,7 +9,7 @@ const projects = [
         id: 1,
         title: 'Le Livre des Pionnières',
         category: 'Expérience VR',
-        image: 'Images/LDP/Gemini_Generated_Image_6jkr626jkr626jkr.png',
+        image: 'Images/LDP/arbres.png',
         description: "Une expérience immersive qui vous transporte dans le passé de femmes qui ont marquées l'histoire. Une expérience narrative dans laquelle vous choisissez l'histoire que vous souhaitez. Un style unique mélangeant 3D et 2D avec un style \'Pop-up art\'.",
         gallery: [
             {
@@ -39,6 +39,10 @@ const projects = [
             {
                 src: 'Images/LDP/Workflow_VoiceCloning.png',
                 caption: "Workflow de VoiceCloning dans ComfyUI avec Chatterbox",
+            },
+            {
+                src: 'Images/LDP/voiture.png',
+                caption: "modélisation de la voiture de Michèle Mouton (audi quattro) dans Blender",
             },
         ],
         details: {

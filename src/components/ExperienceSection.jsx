@@ -54,7 +54,7 @@ const ExperienceSection = () => {
 
                     <div className="flex flex-col md:flex-row gap-12 md:gap-0 w-full">
                         {experiences.map((exp) => (
-                            <div key={exp.id} className="flex-shrink-0 w-full md:w-[60vw] lg:w-[40vw] md:px-8 border-l-2 border-tech-primary/30 md:border-l-0 md:border-t-2 md:pt-8 md:mt-20 pl-6 md:pl-0 relative before:content-[''] before:absolute before:w-4 before:h-4 before:bg-tech-primary before:rounded-full before:-left-[9px] md:before:left-0 md:before:-top-[7px] before:top-2 md:before:top-auto">
+                            <div key={exp.id} className="flex-shrink-0 w-full md:w-[60vw] lg:w-[40vw] md:px-8 border-l-2 border-tech-primary/30 md:border-l-0 md:border-t-2 md:pt-8 md:mt-20 pl-6 md:pl-0 relative before:content-[''] before:absolute before:w-4 before:h-4 before:bg-tech-primary before:rounded-full before:-left-[9px] md:before:left-0 md:before:-top-[9px] before:top-2">
                                 <span className="text-6xl md:text-8xl font-rajdhani font-bold text-white/10 block mb-2 md:mb-4">{exp.year}</span>
                                 <h3 className="text-3xl md:text-4xl font-rajdhani font-bold text-tech-primary mb-1 md:mb-2">{exp.role}</h3>
                                 <h4 className="text-xl md:text-2xl font-rajdhani text-white mb-2 md:mb-4">{exp.company}</h4>

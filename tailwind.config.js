@@ -15,10 +15,10 @@ export default {
                     accent: '#D3C9C1',
                 },
                 artisan: {
-                    bg: '#33352C', // Deepwood Shade
-                    primary: '#F5F5D3', // Fern Whisper
-                    secondary: '#BB8954', // Earthy Drift
-                    surface: '#4C2B12', // Timber Breeze
+                    bg: '#1d341eff', // Deepwood Shade
+                    primary: '#bfb15eff', // Fern Whisper
+                    secondary: '#e1ab72ff', // Earthy Drift
+                    surface: '#a0291fff', // Timber Breeze
                     accent: '#798262', // Canopy Green
                     forest: '#7F5235', // Forest Floor (extra color from palette)
                 },

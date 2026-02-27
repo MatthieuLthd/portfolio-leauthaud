@@ -22,7 +22,7 @@ const Atelier = () => {
                     transition={{ duration: 0.8 }}
                     className="text-center mb-20"
                 >
-                    <h1 className="font-chango text-6xl md:text-8xl mb-6 text-artisan-secondary">Projets manuels</h1>
+                    <h1 className="font-chango text-6xl md:text-8xl mb-6 text-artisan-secondary">Mes projets manuels</h1>
                     <p className="font-serif text-xl md:text-2xl text-artisan-primary italic max-w-2xl mx-auto">
                         Quand l'écran s'éteint, mes mains prennent le relais pour façonner la matière.
                     </p>

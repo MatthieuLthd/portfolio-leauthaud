@@ -137,14 +137,35 @@ const ProjectModal = ({ project, onClose, onNextProject, onPrevProject, theme = 
                                 <div className={`${visualColClasses} p-6 md:p-8 space-y-6 overflow-y-auto ${scrollbarClass} h-full`}>
                                     {/* Main Image */}
                                     <div
-                                        className={`w-full rounded-lg overflow-hidden shadow-md cursor-zoom-in group bg-black/50 flex items-center justify-center min-h-[300px] ${isTech ? 'border border-white/10' : ''}`}
+                                        className={`relative w-full rounded-lg overflow-hidden shadow-md cursor-zoom-in group bg-black/50 flex items-center justify-center min-h-[300px] ${isTech ? 'border border-white/10' : ''}`}
                                         onClick={() => openLightbox(0)}
                                     >
-                                        <img
-                                            src={getAssetUrl(typeof mainImage === 'object' && mainImage !== null ? (mainImage.src || mainImage.image) : mainImage)}
-                                            alt={project.title}
-                                            className="w-full max-h-[60vh] object-contain group-hover:scale-105 transition-transform duration-500"
-                                        />
+                                        {(() => {
+                                            const isMainVideo = typeof mainImage === 'object' && mainImage !== null && mainImage.type === 'video';
+                                            const isMainYouTube = typeof mainImage === 'object' && mainImage !== null && mainImage.type === 'youtube';
+
+                                            let mainSrc;
+                                            if (isMainVideo) mainSrc = mainImage.poster;
+                                            else if (isMainYouTube) mainSrc = `https://img.youtube.com/vi/${mainImage.videoId}/hqdefault.jpg`;
+                                            else mainSrc = typeof mainImage === 'object' && mainImage !== null ? (mainImage.src || mainImage.image) : mainImage;
+
+                                            return (
+                                                <>
+                                                    <img
+                                                        src={getAssetUrl(mainSrc)}
+                                                        alt={project.title}
+                                                        className="w-full max-h-[60vh] object-contain group-hover:scale-105 transition-transform duration-500"
+                                                    />
+                                                    {(isMainVideo || isMainYouTube) && (
+                                                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors">
+                                                            <div className={`w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm border shadow-lg ${isTech ? 'bg-tech-primary/80 border-tech-primary text-black' : 'bg-white/80 border-white text-artisan-secondary'}`}>
+                                                                <svg className="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </>
+                                            );
+                                        })()}
                                     </div>
 
                                     {/* Gallery Grid */}
