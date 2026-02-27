@@ -10,7 +10,7 @@ const getAssetUrl = (path) => {
     return `${cleanBase}${cleanPath}`;
 };
 
-const modelPath = getAssetUrl('models/abstract portfolio.glb');
+const modelPath = getAssetUrl('models/abstract_portfolio.glb');
 
 const AbstractModel = () => {
     const { scene } = useGLTF(modelPath);
@@ -69,7 +69,7 @@ const AbstractModel = () => {
 };
 
 // Préchargement du modèle
-useGLTF.preload(getAssetUrl('models/abstract portfolio.glb'));
+useGLTF.preload(getAssetUrl('models/abstract_portfolio.glb'));
 
 const Scene = () => {
     // --- Paramètres d'éclairage ---
