@@ -7,7 +7,7 @@ const projects = [
     // LDP
     {
         id: 1,
-        title: 'Le Livre des Pionnières',
+        title: '(En cours) - Le Livre des Pionnières',
         category: 'Expérience VR',
         image: 'Images/LDP/arbres.png',
         description: "Une expérience immersive qui vous transporte dans le passé de femmes qui ont marquées l'histoire. Une expérience narrative dans laquelle vous choisissez l'histoire que vous souhaitez. Un style unique mélangeant 3D et 2D avec un style \'Pop-up art\'.",
